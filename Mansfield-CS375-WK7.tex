@@ -81,7 +81,7 @@
         text height=1.5ex,text depth=.25ex % align text horizontally
     ]
     %Standard Pushdown Symbols
-   \node (start) [nonterminal]                            {START};
+   \node (start) [nonterminal]   {START};
    \node (accept) [nonterminal]   at (-3,-3.97)  {ACCEPT};
    \node (reject) [nonterminal]   at (7,-6.5) {REJECT};
    \node (reject2) [nonterminal]   at (-3,-6.5) {REJECT};
@@ -91,13 +91,18 @@
    \node (Y) [terminal,below=of X]                     {READ};
    \node (Z) [terminal,below=of W]                     {READ};
    \path (start)   edge[->] (W)  %  simple edges
-             (W) edge[->]node[pos=0.50, below]{$\Delta$}(accept);
-   \path (W) edge[->] node[pos=0.50, above]{c}(X);
+             (W) edge[->]node[pos=0.50, above]{$\Delta$}(accept)
+                   edge[->] node[pos=0.30, above]{c}(X)
+                   edge[->] node[pos=0.30, left]{d}(Z);
    \draw [->]
      ( $ (X.north)$)    
      - ++(0,+1.1) 
-      node[above left] {c}
+      node at (3.5,-1.5) {c}
      -| ($(W.north)$);
+  \draw [->]
+     ( $ (Z.east)$)    
+       -++(1,0) -++(1,4) -++(-.6,4);
+     -| ($(W)$);
       
             
 
