@@ -83,7 +83,7 @@
     %Standard Pushdown Symbols
    \node (start) [nonterminal]   {START};
    \node (accept) [nonterminal]   at (-3,-3.97)  {ACCEPT};
-   \node (reject) [nonterminal]   at (7,-6.5) {REJECT};
+   \node (reject) [nonterminal]   at (9,-6.5) {REJECT};
    \node (reject2) [nonterminal]   at (-3,-6.5) {REJECT};
    %You will need multiple READ and POP Nodes with a varity of names.
    \node (W) [terminal,below=of start]                {READ};
@@ -94,6 +94,7 @@
              (W) edge[->]node[pos=0.50, above]{$\Delta$}(accept)
                    edge[->] node[pos=0.30, above]{c}(X)
                    edge[->] node[pos=0.30, left]{d}(Z);
+   \path (X) edge[->] node[pos=0.30,right]{d}(Y);
    \draw [->]
      ( $ (X.north)$)    
      - ++(0,+1.1) 
@@ -101,6 +102,18 @@
      -| ($(W.north)$);
   \draw [->]
      ( $ (Z.east)$) -++(1,0) node[right]{d} -++(1,4) -++(-.6,4);
+  \draw [->]
+     ( $ (Y.east)$) -++(1,0) node[right]{d} -++(1,4) -++(-.6,4);
+   \draw [->]
+     ( $ (Y.south)$) -++(0,-1) node[below]{c} -| ($(Z.south)$);
+  \draw [->]
+     ( $ (Z.south)$) -++(4.6,0) node[pos=0.30,above right]{c} ;
+  \draw [->]
+     ( $ (Z.south)$) -++(-3,0) node[pos=0.70,above right]{$\Delta$} -++(-3,2.7);
+  \draw [->]
+     ( $ (Y.south)$) -++(4.5,0) node[pos=0.70,above right]{$\Delta$} -++( 4.5,2.7);
+ \draw [->]
+     ( $ (X.east)$) -++(3.6,0) node[pos=0.70,above right]{$\Delta$} -++( 3.6,-2.2);
       
             
 
