@@ -82,15 +82,24 @@
     ]
     %Standard Pushdown Symbols
    \node (start) [nonterminal]                            {START};
-   \node (reject) [nonterminal]                          {REJECT};
-   \node (accept) [nonterminal,left=of W]         {ACCEPT};
-   %You will need multiple READ Nodes with a varity of names.
+   \node (accept) [nonterminal]   at (-3,-3.97)  {ACCEPT};
+   \node (reject) [nonterminal]   at (7,-6.5) {REJECT};
+   \node (reject2) [nonterminal]   at (-3,-6.5) {REJECT};
+   %You will need multiple READ and POP Nodes with a varity of names.
    \node (W) [terminal,below=of start]                {READ};
    \node (X) [terminal,right=of W]                      {READ};
    \node (Y) [terminal,below=of X]                     {READ};
    \node (Z) [terminal,below=of W]                     {READ};
    \path (start)   edge[->] (W)  %  simple edges
-             (W) edge[->]node[pos=0.62, below]{$\Delta$}(accept);
+             (W) edge[->]node[pos=0.50, below]{$\Delta$}(accept);
+   \path (W) edge[->] node[pos=0.50, above]{c}(X);
+   \draw [->]
+     ( $ (X.north)$)    
+     - ++(0,+1.1) 
+      node[above left] {c}
+     -| ($(W.north)$);
+      
+            
 
   
 \end{tikzpicture}
