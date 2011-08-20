@@ -24,11 +24,11 @@
     minimum size=6mm,
     % The border:
     very thick,
-    draw=red!50!black!50,         % 50% red and 50% black,
+    draw=purple!70!black!50,         % 50% red and 50% black,
                                   % and that mixed with 50% white
     % The filling:
     top color=white,              % a shading that is white at the top...
-    bottom color=red!50!black!20, % and something else at the bottom
+    bottom color=purple!70!black!20, % and something else at the bottom
     % Font
     font=\itshape
   },
@@ -70,33 +70,33 @@
 \end{center}
 \end{figure}
 
+
 \begin{figure}
-\begin{tikzpicture}[
+\begin{center}
+\begin{tikzpicture}[node distance=2.8cm,
         point/.style={coordinate},>=stealth',thick,draw=black!50,
         tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
         hv path/.style={to path={-| (\tikztotarget)}},
         vh path/.style={to path={|- (\tikztotarget)}},
         text height=1.5ex,text depth=.25ex % align text horizontally
     ]
-    
-   \node (start)   [nonterminal]                        {START};
-   \node (reject)   [nonterminal]                        {REJECT};
-   \node (read) [terminal,right=of start]           {digit};
-   \node (accept)     [nonterminal,right=of read]         {ACCEPT};
-   \path (start)   edge[->] (read)  %  simple edges
-             (read) edge[->] (accept);
-   \draw [->]
-     %  start right of digit.east, that is, at the point that is the
-     %  linear combination of digit.east and the vector (2mm,0pt). We
-     %  use the ($ ... $) notation for computing linear combinations
-     ($ (read.east) + (2mm,0) $)
-     %  Now go down
-     -- ++(0,-1.1)
-     %  And back to the left of digit.west
-     -| ($ (read.west) - (2mm,0) $);
-\end{tikzpicture}
+    %Standard Pushdown Symbols
+   \node (start) [nonterminal]                            {START};
+   \node (reject) [nonterminal]                          {REJECT};
+   \node (accept) [nonterminal,left=of W]         {ACCEPT};
+   %You will need multiple READ Nodes with a varity of names.
+   \node (W) [terminal,below=of start]                {READ};
+   \node (X) [terminal,right=of W]                      {READ};
+   \node (Y) [terminal,below=of X]                     {READ};
+   \node (Z) [terminal,below=of W]                     {READ};
+   \path (start)   edge[->] (W)  %  simple edges
+             (W) edge[->]node[pos=0.62, below]{$\Delta$}(accept);
 
+  
+\end{tikzpicture}
+\end{center}
 \end{figure}
+
 
 
 
