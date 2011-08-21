@@ -3,14 +3,17 @@
 \usepackage[light,math]{iwona}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath}
+\usepackage{ulem}
 \usepackage{mathtools}
 \usepackage{xspace}
-\usepackage{graphicx}
+\usepackage{xstring}
 \usepackage[english]{babel}
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage[centering,includeheadfoot,margin=2cm]{geometry}
 \usepackage{tikz}
-\usetikzlibrary{calc,shapes,arrows,automata,trees,shadows,decorations.pathmorphing,positioning,shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing}
+\usetikzlibrary{calc,shapes,arrows,automata,trees,shadows,decorations.pathmorphing,positioning,
+shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrounds}
+
 \begin{document}
 \title{CS375 WK7}
 \author{Jason N Mansfield}
@@ -43,11 +46,45 @@
   skip loop/.style={to path={-- ++(0,#1) -| (\tikztotarget)}}
 }
 
+
 {
   \tikzset{terminal/.append style={text height=1.5ex,text depth=.25ex}}
   \tikzset{nonterminal/.append style={text height=1.5ex,text depth=.25ex}}
+  \tikzset{point/.append style={text height=1.5ex,text depth=.25ex}}
 }
 %end of tikz terminal stuff
+%begin tape stuff
+\tikzset{
+    tape node/.style={
+        on chain,
+        draw,
+        inner sep=1pt,
+        outer xsep=0pt,
+        minimum height=0.2cm,
+        minimum width=0.2cm,
+        text depth=0pt,
+        font=\tiny\tt
+
+    }
+}
+
+\newcommand*\myblackbox[1]{%
+    \node[
+        tape node,
+       blue!90
+    ] {#1};
+}
+
+\newcommand*\mygraybox[1]{%
+    \begin{pgfonlayer}{background}
+        \node[
+            tape node,
+            gray!60
+        ] {#1};
+    \end{pgfonlayer}
+}
+
+%end tape stuff
 
 \begin{figure}
 \begin{center}
@@ -73,6 +110,7 @@
 
 \begin{figure}
 \begin{center}
+\caption{Q01: PDA}
 \begin{tikzpicture}[node distance=2.8cm,
         point/.style={coordinate},>=stealth',thick,draw=black!50,
         tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
@@ -115,15 +153,246 @@
  \draw [->]
      ( $ (X.east)$) -++(3.6,0) node[pos=0.70,above right]{$\Delta$} -++( 3.6,-2.2);
       
-            
-
-  
 \end{tikzpicture}
 \end{center}
 \end{figure}
+\clearpage
 
+\begin{figure}
+\begin{center}
+\caption{Q02: FA}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4.8cm, semithick]
+\tikzstyle{every state}=[draw=black,text=black, ball color=red!40!yellow!47!]
+\node[state,accepting][right of=X](Y){Y};
+\node[state][below of=X](W){W};
+\node[state] (X)[below of=Y] {X};
+\node[state,initial,accepting][above of=W](Z){Z};
+\path (X)edge node{c}(Y)
+              edge [loop right] node{d}(X)
+          (Y)edge node{c}(W)
+              edge [loop above]node{d}(Y)
+          (W)edge node{c}(X)
+               edge[loop left]node{d}(W)
+          (Z)edge node{c}(W)
+              edge node{d}(Y);      
+\end{tikzpicture} 
+\end{center}
+\end{figure}
 
+\begin{figure}
+\begin{center}
+\caption{Q02: PDA}
+\begin{tikzpicture}[node distance=2.8cm,
+        point/.style={coordinate},>=stealth',thick,draw=black!50,
+        tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
+        hv path/.style={to path={-| (\tikztotarget)}},
+        vh path/.style={to path={|- (\tikztotarget)}},
+        text height=1.5ex,text depth=.25ex % align text horizontally
+    ]
+    %Standard Pushdown Symbols
+   \node (start) [nonterminal]   {START};
+   \node (accept) [nonterminal]   at (3.7,2)  {ACCEPT};
+   \node (reject) [nonterminal]   at (2.5,-6.5) {REJECT};
+   \node (push1) [nonterminal]   at (9,-8.5) {PUSH d};
+   \node (push2) [nonterminal]   at (-3,-8.5) {PUSH d};
+   \node (push3) [nonterminal]   at (9,-4) {PUSH d};
+   %You will need multiple READ and POP Nodes with a varity of names.
+   \node (Z) [terminal,below=of start]                {READ};
+   \node (Y) [terminal,right=of Z]                      {READ};
+   \node (W) [terminal,below=of Z]                    {READ};
+   \node (X) [terminal,below=of Y]                     {READ};
+   \node (pop1) [terminal]  at (7,-0.5)               {POP};
+   \node (pop2) [terminal]  at (9,-2.3)               {POP};
+   \node (pop3) [terminal]   at (3.7,0)                {POP};
+   \draw [->] ( $ (Z.east)$) node[above]{d} -| ($(Y.west)$);
+   \draw [->] ( $ (Z.south)$) node[left]{c} -| ($(W.north)$);
+   \draw [->] ( $ (X.north)$) node[right]{c} -| ($(Y.south)$);
+   \draw [->] ( $ (W.east)$) node[above]{c} -| ($(X.west)$);
+   \draw [->] ( $ (Y.south)$) -++(-2,0) -++(-2,-1) node[pos=0.10,left]{c}-++(-4.6,-1);
+   \draw [->] ( $ (Y.north)$) -++(0,1) -++(-2,1)node[above]{d} -++(-2,-0.9);
+   \draw [->] ( $ (X.east)$) -++(2.5,0)node[pos=0.10,above]{d};
+   \draw [->] ($(push3.south) $)-++(0,-1) node[pos=0.50,right]{d} -++(-4.3,-1) -| ($(Y.south)$);
+   \draw [->] (push1.south) -++(0,-1) node[pos=0.50,right]{d} -++(-4.3,-1) -| ($(X.south)$);
+   \draw [->] (push2.south) -++(0,-1) node[pos=0.50,right]{d} -++( 2.3,-1) -| ($(W.south)$);
+   \draw [->] ($(W.west)$) node[above right]{d}  -| ($(push2.east)$) ;
+   \draw [->] ($(Y.east)$) node[above right]{d}  -| ($(push3.west)$);
+   \draw [->] ($(Y.east)$) -++(0,1) -| ($(pop2.west)$)node[pos=1,left]{d} ;
+   \draw [->] ($(Y.east)$)  -++(0,1) -| ($(pop1.west)$)node[pos=.7,right]{c};
+   \draw [->] (pop1.north) node[right]{c} -++(0,1.2);
+   \draw [->] (pop2.north) -++(0,3) node[right]{d} --+(-4,3) --+(-4,-2);
+   \draw [->] (Y.north) -++(0,2.5) node[pos=0.60,left]{$\Delta$} -++(-0.8,2.5);
+   \path (W)[->]edge node[above]{$\Delta$}(reject);
+   \path (X)[->]edge node[above]{$\Delta$}(reject);
+   \path (start) [->]edge (Z);
+   \path (Z) [->]edge node[above]{$\Delta$}(pop3);
+   \path (pop3) [->]edge node[left]{$\Delta$}(accept);
+    
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\clearpage
+%tape one
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{c1}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c2}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c3}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{d1}{\myblackbox{d}}{\mygraybox{d}}%
+    \IfSubStr{#1}{d2}{\myblackbox{d}}{\mygraybox{d}}%
+    \IfSubStr{#1}{d3}{\myblackbox{d}~}{\mygraybox{d}~}
+\end{tikzpicture}
+}
+%end tape one
+\begin{figure}
+\begin{center}
+\caption{Q03.b}
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{c1 c2 c3 d1 d2 d3} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+Push&c$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+$Read_2$&c$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+Push&cc$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+$Read_2$&cc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+Push&ccc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+$Read_2$&ccc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+Pop&cc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+$Read_3$&cc$\Delta$&$\drawboxes{d3} $\\ \hline
+Pop&c$\Delta$&$\drawboxes{d3} $\\ \hline
+$Read_3$&c$\Delta$&$\drawboxes{} $\\ \hline
+Pop&$\Delta$&$\drawboxes{} $\\ \hline
+$Read_3$&$\Delta$&$\drawboxes{} $\\ \hline
+Pop&$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
 
+%tape two
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{c1}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c2}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c3}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{d1}{\myblackbox{d}}{\mygraybox{d}}%
+    \IfSubStr{#1}{d2}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{d3}{\myblackbox{d}~}{\mygraybox{d}~}
+\end{tikzpicture}
+}
+%end tape two
 
+\begin{figure}
+\begin{center}
+\caption{Q03.c}
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{c1 c2 c3 d1 d2 d3} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+Push&c$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+$Read_2$&c$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+Push&cc$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+$Read_2$&cc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+Push&ccc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+$Read_2$&ccc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+Pop&cc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+$Read_3$&cc$\Delta$&$\drawboxes{d3} $\\ \hline
+Pop&c$\Delta$&$\drawboxes{d3} $\\ \hline
+$Read_3$&c$\Delta$&$\drawboxes{} $\\ \hline
+Pop&$\Delta$&$\drawboxes{} $\\ \hline
+$Read_3$&$\Delta$&$\drawboxes{} $\\ \hline
+Pop&$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+
+%tape three
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{c1}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c2}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c3}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{d1}{\myblackbox{d}}{\mygraybox{d}}%
+    \IfSubStr{#1}{d2}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{d3}{\myblackbox{c}~}{\mygraybox{c}~}
+\end{tikzpicture}
+}
+%end tape three
+\begin{figure}
+\begin{center}
+\caption{Q03.d}
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{c1 c2 c3 d1 d2 d3} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+Push&c$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+$Read_2$&c$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+Push&cc$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+$Read_2$&cc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+Push&ccc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+$Read_2$&ccc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+Pop&cc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+$Read_3$&cc$\Delta$&$\drawboxes{d3} $\\ \hline
+Pop&c$\Delta$&$\drawboxes{d3} $\\ \hline
+$Read_3$&c$\Delta$&$\drawboxes{} $\\ \hline
+Pop&$\Delta$&$\drawboxes{} $\\ \hline
+$Read_3$&$\Delta$&$\drawboxes{} $\\ \hline
+Pop&$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+%tape four
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{c1}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c2}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{c3}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{d1}{\myblackbox{c}}{\mygraybox{c}}%
+    \IfSubStr{#1}{d2}{\myblackbox{d}}{\mygraybox{d}}%
+    \IfSubStr{#1}{d3}{\myblackbox{d}~}{\mygraybox{d}~}
+\end{tikzpicture}
+}
+%end tape four
+\begin{figure}
+\begin{center}
+\caption{Q03.e}
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{c1 c2 c3 d1 d2 d3} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+Push&c$\Delta$&$\drawboxes{c2 c3 d1 d2 d3} $\\ \hline
+$Read_2$&c$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+Push&cc$\Delta$&$\drawboxes{c3 d1 d2 d3} $\\ \hline
+$Read_2$&cc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+Push&ccc$\Delta$&$\drawboxes{d1 d2 d3} $\\ \hline
+$Read_2$&ccc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+Push&cccc$\Delta$&$\drawboxes{d2 d3} $\\ \hline
+$Read_2$&cccc$\Delta$&$\drawboxes{d3} $\\ \hline
+Pop&ccc$\Delta$&$\drawboxes{d3} $\\ \hline
+$Read_2$&ccc$\Delta$&$\drawboxes{} $\\ \hline
+Pop&cc$\Delta$&$\drawboxes{} $\\ \hline
+$Read_3$&cc$\Delta$&$\drawboxes{} $\\ \hline
+Pop&c$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{red}{Reject}&c$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
 
 \end{document}
