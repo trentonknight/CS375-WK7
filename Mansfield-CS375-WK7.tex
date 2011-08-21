@@ -243,23 +243,42 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
     ]
     %Standard Pushdown Symbols
    \node (start) [nonterminal]   {START};
+   \node (accept) [nonterminal] at (-5,-8.5)  {ACCEPT};
    \node (push1)[nonterminal] at (0,-4) {PUSH \$};
    \node (push2)[nonterminal] at (0,-10.5) {PUSH c};
    \node (push3)[nonterminal] at (0,-11.8) {PUSH c};
+   \node (push4)[nonterminal] at (-3, -16.5) {PUSH c};
+   \node (push5)[nonterminal] at (3, -16.5) {PUSH d};
    %You will need multiple READ and POP Nodes with a varity of names.
    \node (pop1) [terminal]  at (0,-2)       {$POP_1$};
    \node (pop2) [terminal]  at (0,-8.5)    {$POP_2$};
-   \node (read1)[terminal] at (0,-6) {$READ_1$};
-   \node (read2)[terminal] at (0,-14) {$READ_2$};  
+   \node (pop3) [terminal]  at (0,-16.5)  {$POP_3$};
+   \node (pop4) [terminal]  at (-3,-19)   {$POP_4$};
+   \node (pop5) [terminal]  at (3,-19)     {$POP_5$};
+   \node (pop6) [terminal]  at (0,-22)     {$POP_6$};
+   \node (read1)[terminal] at (0,-6)        {$READ_1$};
+   \node (read2)[terminal] at (0,-14)      {$READ_2$}; 
+   \node (read3)[terminal] at (0,-19)      {$READ_3$};   
    %draw straight lines
    \draw [->] ( $ (start.south)$)  -| ($(pop1.north)$);
    \draw [->] ( $ (pop1.south)$) -|  ($(push1.north)$)node[above left]{\$};
    \draw [->] ( $ (push1.south)$)  -| ($(read1.north)$);
    \draw [->] ( $ (read1.south)$) -|  ($(pop2.north)$)node[right]{c};
+   \draw [->] ( $ (read1.west)$) --+(-3,0) node[above]{$\Delta$}-|  ($(accept.north)$);
    \draw [->] ( $ (pop2.south)$) -|  ($(push2.north)$)node[above left]{c};
    \draw [->] ( $ (push2.south)$) -|  ($(push3.north)$)node[above left]{c};
    \draw [->] ( $ (push3.south)$)  -| ($(read2.north)$);
-   \draw [->] ( $ (read2.east)$)  --+(1,0) --+(1, 5)-| ($(pop2.east)$);
+   \draw [->] ( $ (read2.east)$)  --+(1,0) node[pos=0.60,above] {c} --+(1, 5)-| ($(pop2.east)$);
+   \draw [->] ( $ (read2.south)$) -|  ($(pop3.north)$)node[right]{d};
+   \draw [->] ( $ (pop3.south)$)  -| ($(read3.north)$)node[right]{c};
+   \draw [->] ( $ (read3.west)$)  -| ($(pop4.east)$)node[above]{c};
+   \draw [->] ( $ (read3.east)$)  -| ($(pop5.west)$)node[above]{d};
+   \draw [->] ( $ (read3.south)$)  -| ($(pop6.north)$)node[left]{$\Delta$};
+   \draw [->] ( $ (pop6.west)$) --+(-3,0) node[above]{$\Delta$}-| ($(accept.south)$);
+   \draw [->] ( $ (pop4.north)$)  -| ($(push4.south)$)node[below left]{c};
+   \draw [->] ( $ (pop5.north)$)  -| ($(push5.south)$)node[below right]{d};
+   \draw [->] ( $ (push4.east)$)  -| ($(pop3.west)$);
+   \draw [->] ( $ (push5.west)$)  -| ($(pop3.east)$);
 \end{tikzpicture}
 \end{center}
 \end{figure}
