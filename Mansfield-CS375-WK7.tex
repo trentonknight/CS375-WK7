@@ -243,7 +243,7 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
     ]
     %Standard Pushdown Symbols
    \node (start) [nonterminal]   {START};
-   \node (accept) [nonterminal] at (-5,-8.5)  {ACCEPT};
+   \node (accept) [nonterminal] at (-5,-14.5)  {ACCEPT};
    \node (push1)[nonterminal] at (0,-4) {PUSH \$};
    \node (push2)[nonterminal] at (0,-10.5) {PUSH c};
    \node (push3)[nonterminal] at (0,-11.8) {PUSH c};
@@ -259,6 +259,7 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
    \node (pop4) [terminal]  at (-3,-19)   {$POP_4$};
    \node (pop5) [terminal]  at (3,-19)     {$POP_5$};
    \node (pop6) [terminal]  at (0,-22)     {$POP_6$};
+   \node (pop8) [terminal] at (-5,-8.5)      {$POP_8$};
    \node (read1)[terminal] at (0,-6)        {$READ_1$};
    \node (read2)[terminal] at (0,-14)      {$READ_2$}; 
    \node (read3)[terminal] at (0,-19)      {$READ_3$};   
@@ -267,7 +268,7 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
    \draw [->] ( $ (pop1.south)$) -|  ($(push1.north)$)node[above left]{\$};
    \draw [->] ( $ (push1.south)$)  -| ($(read1.north)$);
    \draw [->] ( $ (read1.south)$) -|  ($(pop2.north)$)node[right]{c};
-   \draw [->] ( $ (read1.west)$) --+(-3,0) node[above]{$\Delta$}-|  ($(accept.north)$);
+   \draw [->] ( $ (read1.west)$) --+(-3,0) node[above]{$\Delta$}-|  ($(pop8.north)$);
    \draw [->] ( $ (pop2.south)$) -|  ($(push2.north)$)node[above left]{c};
    \draw [->] ( $ (push2.south)$) -|  ($(push3.north)$)node[above left]{c};
    \draw [->] ( $ (push3.south)$)  -| ($(read2.north)$);
@@ -286,6 +287,7 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
    \draw [->] ( $ (pop7.south)$) -|  ($(push6.north)$)node[above left]{\$};
    \draw [->] ( $ (push6.south)$) -|  ($(push7.north)$)node[above left]{c};
    \draw [->] ( $ (push7.south)$) --+(0,-1)-|  ($(read2.west)$);
+   \draw [->] ( $ (pop8.south)$) -| node[left]{$\Delta$} ($(accept.north)$);
 \end{tikzpicture}
 \end{center}
 \end{figure}
@@ -297,8 +299,14 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
 \hline
 FROM Where & To Where & READ What & POP What& PUSH What & ROW Number\\ \hline
 START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
-$READ_1$&ACCEPT&$\Lambda$&&&\\ \hline
-
+$READ_1$&ACCEPT&$\Lambda$&$\Lambda$&-&2\\ \hline
+$READ_1$&$READ_2$&c&\$&c\$&3\\ \hline
+$READ_1$&$READ_2$&c&c&cc&4\\ \hline
+$READ_2$&$READ_2$&c&c&cc&5\\ \hline
+$READ_2$&$READ_3$&d&c&-&6\\ \hline
+$READ_3$&$READ_3$&c&cc&c&7\\ \hline
+$READ_3$&$READ_3$&d&dc&d&7\\ \hline
+$READ_3$&$ACCEPT$&$\Lambda$&$\Lambda$&-&8\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
