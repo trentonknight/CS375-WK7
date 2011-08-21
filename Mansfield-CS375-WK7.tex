@@ -249,9 +249,12 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
    \node (push3)[nonterminal] at (0,-11.8) {PUSH c};
    \node (push4)[nonterminal] at (-3, -16.5) {PUSH c};
    \node (push5)[nonterminal] at (3, -16.5) {PUSH d};
+   \node (push6)[nonterminal] at (-2.5,-10.5) {PUSH \$};
+   \node (push7)[nonterminal] at (-2.5,-11.8) {PUSH c};
    %You will need multiple READ and POP Nodes with a varity of names.
    \node (pop1) [terminal]  at (0,-2)       {$POP_1$};
    \node (pop2) [terminal]  at (0,-8.5)    {$POP_2$};
+   \node (pop7) [terminal]  at (-2.5,-8.5) {$POP_7$};
    \node (pop3) [terminal]  at (0,-16.5)  {$POP_3$};
    \node (pop4) [terminal]  at (-3,-19)   {$POP_4$};
    \node (pop5) [terminal]  at (3,-19)     {$POP_5$};
@@ -279,10 +282,26 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
    \draw [->] ( $ (pop5.north)$)  -| ($(push5.south)$)node[below right]{d};
    \draw [->] ( $ (push4.east)$)  -| ($(pop3.west)$);
    \draw [->] ( $ (push5.west)$)  -| ($(pop3.east)$);
+   \draw [->] ( $ (read1.west)$) --+(-1,0) -|  ($(pop7.north)$)node[right]{$c$};
+   \draw [->] ( $ (pop7.south)$) -|  ($(push6.north)$)node[above left]{\$};
+   \draw [->] ( $ (push6.south)$) -|  ($(push7.north)$)node[above left]{c};
+   \draw [->] ( $ (push7.south)$) --+(0,-1)-|  ($(read2.west)$);
 \end{tikzpicture}
 \end{center}
 \end{figure}
 \clearpage
+\begin{figure}
+\begin{center}
+\caption{Q03.a Summary Table}
+\begin{tabular}{| l | c | c |c |c|c| }
+\hline
+FROM Where & To Where & READ What & POP What& PUSH What & ROW Number\\ \hline
+START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
+$READ_1$&ACCEPT&$\Lambda$&&&\\ \hline
+
+\end{tabular}
+\end{center}
+\end{figure}
 %tape one
 \DeclareRobustCommand*\drawboxes[1]{%
 \begin{tikzpicture}[
