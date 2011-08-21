@@ -231,6 +231,39 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
 \end{center}
 \end{figure}
 \clearpage
+\begin{figure}
+\begin{center}
+\caption{Q03a: Conversion Form}
+\begin{tikzpicture}[node distance=2.8cm,
+        point/.style={coordinate},>=stealth',thick,draw=black!50,
+        tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
+        hv path/.style={to path={-| (\tikztotarget)}},
+        vh path/.style={to path={|- (\tikztotarget)}},
+        text height=1.5ex,text depth=.25ex % align text horizontally
+    ]
+    %Standard Pushdown Symbols
+   \node (start) [nonterminal]   {START};
+   \node (push1)[nonterminal] at (0,-4) {PUSH \$};
+   \node (push2)[nonterminal] at (0,-10.5) {PUSH c};
+   \node (push3)[nonterminal] at (0,-11.8) {PUSH c};
+   %You will need multiple READ and POP Nodes with a varity of names.
+   \node (pop1) [terminal]  at (0,-2)       {$POP_1$};
+   \node (pop2) [terminal]  at (0,-8.5)    {$POP_2$};
+   \node (read1)[terminal] at (0,-6) {$READ_1$};
+   \node (read2)[terminal] at (0,-14) {$READ_2$};  
+   %draw straight lines
+   \draw [->] ( $ (start.south)$)  -| ($(pop1.north)$);
+   \draw [->] ( $ (pop1.south)$) -|  ($(push1.north)$)node[above left]{\$};
+   \draw [->] ( $ (push1.south)$)  -| ($(read1.north)$);
+   \draw [->] ( $ (read1.south)$) -|  ($(pop2.north)$)node[right]{c};
+   \draw [->] ( $ (pop2.south)$) -|  ($(push2.north)$)node[above left]{c};
+   \draw [->] ( $ (push2.south)$) -|  ($(push3.north)$)node[above left]{c};
+   \draw [->] ( $ (push3.south)$)  -| ($(read2.north)$);
+   \draw [->] ( $ (read2.east)$)  --+(1,0) --+(1, 5)-| ($(pop2.east)$);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\clearpage
 %tape one
 \DeclareRobustCommand*\drawboxes[1]{%
 \begin{tikzpicture}[
@@ -394,5 +427,7 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
+
+
 
 \end{document}
