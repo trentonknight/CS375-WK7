@@ -550,17 +550,17 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
    \draw[->] ( $ (push8.west)$)-++(-0.8,0);
    \draw[->] ( $ (push7.west)$)-++(-0.8,0);
    \draw[->] ( $ (push6.west)$)-++(-0.8,0);
-   \draw[->]  ( $ (read1.south)$) -++(-2,0) -++(-2,-0.9);
-   \draw[->]  ( $ (read1.south)$) -++(2,0) -++(2,-0.9);
-    \draw[->]  ( $ (pop6.south)$) -| ($(push10.north)$);
-    \draw[->]  ( $ (pop7.south)$) -| ($(push11.north)$);
+   \draw[->]  ( $ (read1.south)$) -++(-2,0) -++(-2,-0.9)node[above right]{a};
+   \draw[->]  ( $ (read1.south)$) -++(2,0) -++(2,-0.9)node[above left]{b};
+    \draw[->]  ( $ (pop6.south)$) -| ($(push10.north)$) node[above left]{a};
+    \draw[->]  ( $ (pop7.south)$) -| ($(push11.north)$)node[above right]{b};
     \draw[->]  ( $ (push10.south)$) -| ($(pop8.west)$);
     \draw[->]  ( $ (push11.south)$) -| ($(pop8.east)$);
-   \draw[->]  ( $ (pop8.south)$) -| ($(read2.north)$);
-    \draw[->]  ( $ (read2.south)$) -| ($(pop9.north)$);
-     \draw[->]  ( $ (pop9.south)$) -| ($(accept.north)$);
-     \draw[->]  ( $ (read2.west)$)-++(-2,0) -++(-2,8.5)-++(-0.9,8.5);
-     \draw[->]  ( $ (read2.east)$)-++( 2,0) -++( 2,8.5) -++(0.9,8.5);
+   \draw[->]  ( $ (pop8.south)$) -| ($(read2.north)$)node[above right]{x};
+    \draw[->]  ( $ (read2.south)$) -| ($(pop9.north)$)node[above right]{$\Delta$};
+     \draw[->]  ( $ (pop9.south)$) -| ($(accept.north)$)node[above right]{\$};
+     \draw[->]  ( $ (read2.west)$)-++(-2,0) node[above left]{a}-++(-2,8.5)-++(-0.9,8.5);
+     \draw[->]  ( $ (read2.east)$)-++( 2,0)node[above right]{b} -++( 2,8.5) -++(0.9,8.5);
 \end{tikzpicture}
 \end{center}
 \end{figure}
