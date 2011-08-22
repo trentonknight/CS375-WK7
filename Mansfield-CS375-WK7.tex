@@ -941,5 +941,50 @@ $Pop$&$\Delta$&$\drawboxes{} $\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
+\clearpage
+\begin{figure}
+\begin{center}
+\caption{Q12: PDA}
+\begin{tikzpicture}[node distance=2.8cm,
+        point/.style={coordinate},>=stealth',thick,draw=black!50,
+        tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
+        hv path/.style={to path={-| (\tikztotarget)}},
+        vh path/.style={to path={|- (\tikztotarget)}},
+        text height=1.5ex,text depth=.25ex % align text horizontally
+    ]
+    %Standard Pushdown Symbols
+   \node (start) [nonterminal]   {START};
+   \node (push1) [nonterminal]  at(-3,-2) {$PUSH_a$};
+   \node (reject1) [nonterminal]  at(0,-7) {$REJECT$};
+   \node (reject2) [nonterminal]  at(-3,-5) {$REJECT$};
+   \node (reject3) [nonterminal]  at(2.7,-7) {$REJECT$};
+   \node (reject4) [nonterminal]  at(5.7,-7) {$REJECT$};
+   \node (reject5) [nonterminal]  at(10,-8) {$REJECT$};
+   \node (reject6) [nonterminal]  at(12.3,-8) {$REJECT$};
+   \node (accept) [nonterminal]  at(7.6,-8) {$ACCEPT$};
+   %You will need multiple READ and POP Nodes with a varity of names.
+   \node (read1) [terminal]   at(0,-2)     {$READ_1$};
+   \node (pop1) [terminal]   at(0,-5)     {$POP_1$};
+   \node (read2) [terminal]   at(2.7,-5)     {$READ_2$};
+   \node (read3) [terminal]   at(5.7,-5)     {$READ_3$};
+    \node (pop2) [terminal]   at(8.7,-5)     {$POP$};
+   \draw [->] ( $ (start.south)$) -| ($(read1.north)$);
+   \draw [->] ( $ (read1.west)$) -| ($(push1.east)$)node[above right]{a};
+   \draw [->] ( $ (read1.east)$) -++(7.5,0) node[above right]{$\Delta$}-++(7.57,-2.1);
+   \draw [->] ( $ (push1.north)$) -++(0,1.2) -++(3,1.2);
+   \draw [->] ( $ (read1.south)$) -| ($(pop1.north)$)node[above left]{b};
+   \draw [->] ( $ (pop1.east)$) -| ($(read2.west)$)node[above]{a};
+   \draw [->] ( $ (read2.east)$) -| ($(read3.west)$)node[above]{b};
+   \draw[->] ( $ (read3.north)$) -++(0,0.5) node[above]{b}-++(-5.7,0.5);
+   \draw[->] ( $ (pop1.west)$) node[above]{$\Delta$} -++(-1,0);
+   \draw[->] ( $ (pop1.south)$) node[right]{b} -++(0,-0.7);
+   \draw[->] ( $ (read2.south)$) node[right]{a} -++(0,-0.6);
+   \draw[->] ( $ (read3.south)$) node[right]{a}-++(0,-0.6);
+   \draw[->] ( $ (pop2.west)$)-++(-0.4,0) node[below right]{$\Delta$}-++(-0.4,-2.7);
+   \draw[->] ( $ (pop2.east)$)-++(0.4,0)node[below left]{a}-++(0.4,-2.7);
+   \draw[->] ( $ (pop2.east)$)-++(2.7,0)node[below left]{b}-++(2.7,-2.7);
+\end{tikzpicture}
+\end{center}
+\end{figure}
 
 \end{document}
