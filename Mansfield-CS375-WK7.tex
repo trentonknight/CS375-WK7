@@ -565,6 +565,7 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
 \end{center}
 \end{figure}
 \clearpage
+
 \begin{figure}
 \begin{center}
 \caption{Q05-07: Summary Table}
@@ -581,6 +582,79 @@ $READ_1$&$READ_2$&b&bx&b&7\\ \hline
 $READ_2$&$READ_2$&a&ax&a&8\\ \hline
 $READ_2$&$READ_2$&b&bx&b&9\\ \hline
 $READ_2$&$ACCEPT$&$\Delta$&\$&-&10\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+
+%tape five
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{1}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{2}{\myblackbox{b}~}{\mygraybox{b}~}
+\end{tikzpicture}
+}
+%end tape five
+\begin{figure}
+\begin{center}
+\caption{Q05}
+$Net(READ_1, READ_1, a) Row 2$\\
+$Net(READ_1,READ_2,b) Row 7$\\
+$Net(READ_2,ACCEPT,\Delta) Row 10$\\
+Example with Tape\\
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{1 2} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{2} $\\ \hline
+$Push_x$&x$\Delta$ &$\drawboxes{2} $\\ \hline
+$Read_1$&x$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+$Read_2$&$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+%tape six
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{1}{\myblackbox{b}}{\mygraybox{b}}%
+     \IfSubStr{#1}{2}{\myblackbox{b}}{\mygraybox{b}}%
+     \IfSubStr{#1}{3}{\myblackbox{b}}{\mygraybox{b}}%
+    \IfSubStr{#1}{4}{\myblackbox{a}~}{\mygraybox{a}~}
+\end{tikzpicture}
+}
+%end tape six
+\begin{figure}
+\begin{center}
+\caption{Q06}
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1,READ_2,a) Row 6$\\
+$Net(READ_2,ACCEPT,\Delta) Row 10$\\
+Example with Tape\\
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{1 2 3 4} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{2 3 4} $\\ \hline
+$Push_x$&x$\Delta$ &$\drawboxes{2 3 4} $\\ \hline
+$Read_1$&x$\Delta$&$\drawboxes{3 4} $\\ \hline
+$Push_x$&xx$\Delta$ &$\drawboxes{3 4} $\\ \hline
+$Read_1$&xx$\Delta$&$\drawboxes{4} $\\ \hline
+$Pop$&x$\Delta$ &$\drawboxes{4} $\\ \hline
+$Read_2$&x$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$ &$\drawboxes{} $\\ \hline
+$Read_2$&$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
@@ -670,5 +744,186 @@ $READ_2$&$ACCEPT$&$\Delta$&\$&-&10\\ \hline
 \end{center}
 \end{figure}
 
-\clearpage
+%tape seven
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{1}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{2}{\myblackbox{b}~}{\mygraybox{b}~}
+\end{tikzpicture}
+}
+%end tape seven
+\begin{figure}
+\begin{center}
+\caption{Q08}
+$Net(READ_1, READ_1, a) Row 2$\\
+$Net(READ_1,READ_2,a) Row 6$\\
+$Net(READ_2,ACCEPT,\Delta) Row 10$\\
+Example with Tape\\
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{1 2} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{2} $\\ \hline
+$Push$&x$\Delta$&$\drawboxes{2} $\\ \hline
+$Read_1$&x$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+$Read_2$&$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+
+%tape eight
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{1}{\myblackbox{b}}{\mygraybox{a}}%
+    \IfSubStr{#1}{2}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{3}{\myblackbox{b}}{\mygraybox{a}}%
+    \IfSubStr{#1}{4}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{5}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{6}{\myblackbox{a}~}{\mygraybox{b}~}
+\end{tikzpicture}
+}
+%end tape eight
+\begin{figure}
+\begin{center}
+\caption{Q09}
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_1, a) Row 2$\\
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_2, a) Row 6$\\
+$Net(READ_2, READ_2, a) Row 8$\\
+$Net(READ_2,READ_2,a) Row 8$\\
+$Net(READ_2,ACCEPT,\Delta) Row 10$\\
+Example with Tape\\
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{1 2 3 4 5 6 } $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{2 3 4 5 6 } $\\ \hline
+$Push$&x$\Delta$&$\drawboxes{2 3 4 5 6 } $\\ \hline
+$Read_1$&x$\Delta$&$\drawboxes{ 3 4 5 6 } $\\ \hline
+$Push$&xx$\Delta$&$\drawboxes{3 4 5 6 } $\\ \hline
+$Read_1$&xx$\Delta$&$\drawboxes{4 5 6 } $\\ \hline
+$Push$&xxx$\Delta$&$\drawboxes{4 5 6 } $\\ \hline
+$Read_1$&xxx$\Delta$&$\drawboxes{5 6 } $\\ \hline
+$Pop$&xx$\Delta$&$\drawboxes{5 6 } $\\ \hline
+$Read_2$&xx$\Delta$&$\drawboxes{6 } $\\ \hline
+$Pop$&x$\Delta$&$\drawboxes{6 } $\\ \hline
+$Read_2$&x$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+$Read_2$&$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+\textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+
+%tape nine
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{1}{\myblackbox{b}}{\mygraybox{a}}%
+    \IfSubStr{#1}{2}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{3}{\myblackbox{b}}{\mygraybox{a}}%
+    \IfSubStr{#1}{4}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{5}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{6}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{7}{\myblackbox{b}~}{\mygraybox{b}~}
+\end{tikzpicture}
+}
+%end tape nine
+\begin{figure}
+\begin{center}
+\caption{Q10}
+The PDA for 8-11 is an EVENPALINDROME therefore it is impossible to balance the amount of readable tape with the stack if not even as shown below.If instead of the below example we were to remain in READ 1 an additional cycle then we would have to many x's on the Stack and the tape would complete too soon. In this case the tape completes too late.\\
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_1, a) Row 2$\\
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_2, a) Row 6$\\
+$Net(READ_2, READ_2, a) Row 8$\\
+$Net(READ_2,READ_2,b) Row 8$\\
+CRASH\\
+Example with Tape\\
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{1 2 3 4 5 6 7} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{2 3 4 5 6 7} $\\ \hline
+$Push$&x$\Delta$&$\drawboxes{2 3 4 5 6 7} $\\ \hline
+$Read_1$&x$\Delta$&$\drawboxes{ 3 4 5 6 7} $\\ \hline
+$Push$&xx$\Delta$&$\drawboxes{3 4 5 6 7} $\\ \hline
+$Read_1$&xx$\Delta$&$\drawboxes{4 5 6 7} $\\ \hline
+$Push$&xxx$\Delta$&$\drawboxes{4 5 6 7} $\\ \hline
+$Read_1$&xxx$\Delta$&$\drawboxes{5 6 7} $\\ \hline
+$Pop$&xx$\Delta$&$\drawboxes{5 6 7} $\\ \hline
+$Read_2$&xx$\Delta$&$\drawboxes{6 7} $\\ \hline
+$Pop$&x$\Delta$&$\drawboxes{6 7} $\\ \hline
+$Read_2$&x$\Delta$&$\drawboxes{7} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{7} $\\ \hline
+$Read_2$&$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+
+%tape nine
+\DeclareRobustCommand*\drawboxes[1]{%
+\begin{tikzpicture}[
+        start chain=going right,
+        node distance=0pt
+    ]
+    \IfSubStr{#1}{1}{\myblackbox{b}}{\mygraybox{a}}%
+    \IfSubStr{#1}{2}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{3}{\myblackbox{b}}{\mygraybox{a}}%
+    \IfSubStr{#1}{4}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{5}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{6}{\myblackbox{a}}{\mygraybox{a}}%
+    \IfSubStr{#1}{7}{\myblackbox{a}~}{\mygraybox{b}~}
+\end{tikzpicture}
+}
+%end tape nine
+\begin{figure}
+\begin{center}
+\caption{Q11}
+Once again the PDA for 8-11 is an EVENPALINDROME therefore it is impossible to balance the amount of readable tape with the stack if not even as shown below. If instead of the below example we were to remain in READ 1 an additional cycle then we would have to many x's on the Stack and the tape would complete too soon. In this case the tape completes too late. This example is identical to the falure shown above with the exception of the extra character on the string being a 'a'\\
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_1, a) Row 2$\\
+$Net(READ_1, READ_1, b) Row 5$\\
+$Net(READ_1, READ_2, a) Row 6$\\
+$Net(READ_2, READ_2, a) Row 8$\\
+$Net(READ_2,READ_2,a) Row 8$\\
+CRASH\\
+Example with Tape\\
+\begin{tabular}{| l | c | r | }
+\hline
+STATE & STACK & TAPE\\ \hline
+Start&$\Delta$&$\drawboxes{1 2 3 4 5 6 7} $\\ \hline
+$Read_1$&$\Delta$&$\drawboxes{2 3 4 5 6 7} $\\ \hline
+$Push$&x$\Delta$&$\drawboxes{2 3 4 5 6 7} $\\ \hline
+$Read_1$&x$\Delta$&$\drawboxes{ 3 4 5 6 7} $\\ \hline
+$Push$&xx$\Delta$&$\drawboxes{3 4 5 6 7} $\\ \hline
+$Read_1$&xx$\Delta$&$\drawboxes{4 5 6 7} $\\ \hline
+$Push$&xxx$\Delta$&$\drawboxes{4 5 6 7} $\\ \hline
+$Read_1$&xxx$\Delta$&$\drawboxes{5 6 7} $\\ \hline
+$Pop$&xx$\Delta$&$\drawboxes{5 6 7} $\\ \hline
+$Read_2$&xx$\Delta$&$\drawboxes{6 7} $\\ \hline
+$Pop$&x$\Delta$&$\drawboxes{6 7} $\\ \hline
+$Read_2$&x$\Delta$&$\drawboxes{7} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{7} $\\ \hline
+$Read_2$&$\Delta$&$\drawboxes{} $\\ \hline
+$Pop$&$\Delta$&$\drawboxes{} $\\ \hline
+\end{tabular}
+\end{center}
+\end{figure}
+
 \end{document}
