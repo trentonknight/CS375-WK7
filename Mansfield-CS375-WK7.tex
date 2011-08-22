@@ -507,6 +507,14 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
     %Standard Pushdown Symbols
    \node (start) [nonterminal]   {START};
    \node (push1)[nonterminal] at (0,-4) {PUSH \$};
+   \node (push2)[nonterminal] at (-7, 0) {PUSH \$};
+   \node (push3)[nonterminal] at (-7, -2) {PUSH a};
+   \node (push4)[nonterminal] at (-7, -4) {PUSH b};
+   \node (push5)[nonterminal] at (-7, -6) {PUSH \$};
+    \node (push6)[nonterminal] at (-10, 0) {PUSH x};
+   \node (push7)[nonterminal] at (-10, -2) {PUSH x};
+   \node (push8)[nonterminal] at (-10, -4) {PUSH x};
+   \node (push9)[nonterminal] at (-10, -6) {PUSH x};
    %You will need multiple READ and POP Nodes with a varity of names.
    \node (pop1) [terminal]  at (0,-2)       {$POP_1$};
    \node (pop2) [terminal]  at (-4,0)       {$POP_2$};
@@ -518,10 +526,19 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
    \draw [->] ( $ (start.south)$)  -| ($(pop1.north)$);
    \draw [->] ( $ (pop1.south)$) -|  ($(push1.north)$)node[above left]{\$};
    \draw [->] ( $ (push1.south)$)  -| ($(read1.north)$);
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,6)-++(-1.9,6);
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,4)-++(-1.9,4);
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,2)-++(-1.9,2);
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,0)-++(-1.9,0);
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,6)-++(-1.9,6)node[above]{a};
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,4)-++(-1.9,4)node[above]{a};
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,2)-++(-1.9,2)node[above]{b};
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,0)-++(-1.9,0)node[above]{b};
+   \draw [->] ( $ (pop2.west)$)  -| ($(push2.east)$);
+   \draw [->] ( $ (pop3.west)$)  -| ($(push3.east)$);
+   \draw [->] ( $ (pop4.west)$)  -| ($(push4.east)$);
+   \draw [->] ( $ (pop5.west)$)  -| ($(push5.east)$);
+   \draw [->] ( $ (push2.west)$)  -| ($(push6.east)$);
+   \draw [->] ( $ (push3.west)$)  -| ($(push7.east)$);
+   \draw [->] ( $ (push4.west)$)  -| ($(push8.east)$);
+   \draw [->] ( $ (push5.west)$)  -| ($(push9.east)$);
+   \draw [->] ( $ (push9.west)$) -++(-0.8,0)-++(-0.8,7.5) -++( 9.5,7.5) -++(9.5,1.4) -++(10.89,1.4);
 \end{tikzpicture}
 \end{center}
 \end{figure}
