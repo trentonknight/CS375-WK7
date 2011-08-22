@@ -493,77 +493,10 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
-\clearpage
-\begin{figure}
-\begin{center}
-\caption{Q05-7: Conversion Form}
-\begin{tikzpicture}[node distance=2.8cm,
-        point/.style={coordinate},>=stealth',thick,draw=black!50,
-        tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
-        hv path/.style={to path={-| (\tikztotarget)}},
-        vh path/.style={to path={|- (\tikztotarget)}},
-        text height=1.5ex,text depth=.25ex % align text horizontally
-    ]
-    %Standard Pushdown Symbols
-   \node (start) [nonterminal]   {START};
-   \node (accept) [nonterminal]  at (0,-21)       {ACCEPT};
-   \node (push1)[nonterminal] at (0,-4) {PUSH \$};
-   \node (push2)[nonterminal] at (-7, 0) {PUSH \$};
-   \node (push3)[nonterminal] at (-7, -2) {PUSH a};
-   \node (push4)[nonterminal] at (-7, -4) {PUSH b};
-   \node (push5)[nonterminal] at (-7, -6) {PUSH \$};
-    \node (push6)[nonterminal] at (-10, 0) {PUSH x};
-   \node (push7)[nonterminal] at (-10, -2) {PUSH x};
-   \node (push8)[nonterminal] at (-10, -4) {PUSH x};
-   \node (push9)[nonterminal] at (-10, -6) {PUSH x};
-   \node (push10) [nonterminal]  at (-2,-11)  {PUSH a};
-   %You will need multiple READ and POP Nodes with a varity of names.
-   \node (pop1) [terminal]  at (0,-2)       {$POP_1$};
-   \node (pop2) [terminal]  at (-4,0)       {$POP_2$};
-   \node (pop3) [terminal]  at (-4,-2)       {$POP_3$};
-   \node (pop4) [terminal]  at (-4,-4)       {$POP_4$};
-   \node (pop5) [terminal]  at (-4,-6)       {$POP_5$};
-   \node (pop6) [terminal]  at (-2,-9)       {$POP_6$};
-   \node (pop8) [terminal]  at (0,-13)       {$POP_8$};
-   \node (pop9) [terminal]  at (0,-19)       {$POP_9$};
-   \node (read1)[terminal] at (0,-6)        {$READ_1$};
-   \node (read2) [terminal]  at (0,-16)       {$READ_2$};
-   %draw straight lines
-   \draw [->] ( $ (start.south)$)  -| ($(pop1.north)$);
-   \draw [->] ( $ (pop1.south)$) -|  ($(push1.north)$)node[above left]{\$};
-   \draw [->] ( $ (push1.south)$)  -| ($(read1.north)$);
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,6)-++(-1.9,6)node[above]{a};
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,4)-++(-1.9,4)node[above]{a};
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,2)-++(-1.9,2)node[above]{b};
-   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,0)-++(-1.9,0)node[above]{b};
-   \draw [->] ( $ (pop2.west)$)  -| ($(push2.east)$)node[above right]{\$};
-   \draw [->] ( $ (pop3.west)$)  -| ($(push3.east)$)node[above right]{a};
-   \draw [->] ( $ (pop4.west)$)  -| ($(push4.east)$)node[above right]{b};
-   \draw [->] ( $ (pop5.west)$)  -| ($(push5.east)$)node[above right]{\$};
-   \draw [->] ( $ (push2.west)$)  -| ($(push6.east)$);
-   \draw [->] ( $ (push3.west)$)  -| ($(push7.east)$);
-   \draw [->] ( $ (push4.west)$)  -| ($(push8.east)$);
-   \draw [->] ( $ (push5.west)$)  -| ($(push9.east)$);
-   \draw [->] ( $ (push9.west)$) -++(-0.8,0)-++(-0.8,7.5) -++( 9.5,7.5) -++(9.5,1.4) -++(10.89,1.4);
-   \draw[->] ( $ (push8.west)$)-++(-0.8,0);
-   \draw[->] ( $ (push7.west)$)-++(-0.8,0);
-   \draw[->] ( $ (push6.west)$)-++(-0.8,0);
-   \draw[->]  ( $ (read1.south)$) -++(-2,0) -++(-2,-0.9)node[above right]{a};
-    \draw[->]  ( $ (pop6.south)$) -| ($(push10.north)$) node[above left]{a};
-    \draw[->]  ( $ (push10.south)$) -| ($(pop8.west)$);
-   \draw[->]  ( $ (pop8.south)$) -| ($(read2.north)$)node[above right]{x};
-    \draw[->]  ( $ (read2.south)$) -| ($(pop9.north)$)node[above right]{$\Delta$};
-     \draw[->]  ( $ (pop9.south)$) -| ($(accept.north)$)node[above right]{\$};
-     \draw[->]  ( $ (read2.west)$)-++(-2,0) node[above left]{a}-++(-2,8.5)-++(-0.9,8.5);
-\end{tikzpicture}
-\end{center}
-\end{figure}
-\clearpage
 
-\clearpage
 \begin{figure}
 \begin{center}
-\caption{Q08-11: Conversion Form}
+\caption{Q05-07: Conversion Form}
 \begin{tikzpicture}[node distance=2.8cm,
         point/.style={coordinate},>=stealth',thick,draw=black!50,
         tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
@@ -632,6 +565,95 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
 \end{center}
 \end{figure}
 \clearpage
+\begin{figure}
+\begin{center}
+\caption{Q05-07: Summary Table}
+\begin{tabular}{| l | c | c |c |c|c| }
+\hline
+FROM Where & To Where & READ What & POP What& PUSH What & ROW Number\\ \hline
+START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
 
+\end{tabular}
+\end{center}
+\end{figure}
+\clearpage
+\begin{figure}
+\begin{center}
+\caption{Q08-11: Conversion Form}
+\begin{tikzpicture}[node distance=2.8cm,
+        point/.style={coordinate},>=stealth',thick,draw=black!50,
+        tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
+        hv path/.style={to path={-| (\tikztotarget)}},
+        vh path/.style={to path={|- (\tikztotarget)}},
+        text height=1.5ex,text depth=.25ex % align text horizontally
+    ]
+    %Standard Pushdown Symbols
+   \node (start) [nonterminal]   {START};
+   \node (accept) [nonterminal]  at (0,-21)       {ACCEPT};
+   \node (push1)[nonterminal] at (0,-4) {PUSH \$};
+   \node (push2)[nonterminal] at (-7, 0) {PUSH \$};
+   \node (push3)[nonterminal] at (-7, -2) {PUSH a};
+   \node (push4)[nonterminal] at (-7, -4) {PUSH b};
+   \node (push5)[nonterminal] at (-7, -6) {PUSH \$};
+    \node (push6)[nonterminal] at (-10, 0) {PUSH x};
+   \node (push7)[nonterminal] at (-10, -2) {PUSH x};
+   \node (push8)[nonterminal] at (-10, -4) {PUSH x};
+   \node (push9)[nonterminal] at (-10, -6) {PUSH x};
+   \node (push10) [nonterminal]  at (-2,-11)  {PUSH a};
+   %You will need multiple READ and POP Nodes with a varity of names.
+   \node (pop1) [terminal]  at (0,-2)       {$POP_1$};
+   \node (pop2) [terminal]  at (-4,0)       {$POP_2$};
+   \node (pop3) [terminal]  at (-4,-2)       {$POP_3$};
+   \node (pop4) [terminal]  at (-4,-4)       {$POP_4$};
+   \node (pop5) [terminal]  at (-4,-6)       {$POP_5$};
+   \node (pop6) [terminal]  at (-2,-9)       {$POP_6$};
+   \node (pop8) [terminal]  at (0,-13)       {$POP_8$};
+   \node (pop9) [terminal]  at (0,-19)       {$POP_9$};
+   \node (read1)[terminal] at (0,-6)        {$READ_1$};
+   \node (read2) [terminal]  at (0,-16)       {$READ_2$};
+   %draw straight lines
+   \draw [->] ( $ (start.south)$)  -| ($(pop1.north)$);
+   \draw [->] ( $ (pop1.south)$) -|  ($(push1.north)$)node[above left]{\$};
+   \draw [->] ( $ (push1.south)$)  -| ($(read1.north)$);
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,6)-++(-1.9,6)node[above]{a};
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,4)-++(-1.9,4)node[above]{a};
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,2)-++(-1.9,2)node[above]{b};
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,0)-++(-1.9,0)node[above]{b};
+   \draw [->] ( $ (pop2.west)$)  -| ($(push2.east)$)node[above right]{\$};
+   \draw [->] ( $ (pop3.west)$)  -| ($(push3.east)$)node[above right]{a};
+   \draw [->] ( $ (pop4.west)$)  -| ($(push4.east)$)node[above right]{b};
+   \draw [->] ( $ (pop5.west)$)  -| ($(push5.east)$)node[above right]{\$};
+   \draw [->] ( $ (push2.west)$)  -| ($(push6.east)$);
+   \draw [->] ( $ (push3.west)$)  -| ($(push7.east)$);
+   \draw [->] ( $ (push4.west)$)  -| ($(push8.east)$);
+   \draw [->] ( $ (push5.west)$)  -| ($(push9.east)$);
+   \draw [->] ( $ (push9.west)$) -++(-0.8,0)-++(-0.8,7.5) -++( 9.5,7.5) -++(9.5,1.4) -++(10.89,1.4);
+   \draw[->] ( $ (push8.west)$)-++(-0.8,0);
+   \draw[->] ( $ (push7.west)$)-++(-0.8,0);
+   \draw[->] ( $ (push6.west)$)-++(-0.8,0);
+   \draw[->]  ( $ (read1.south)$) -++(-2,0) -++(-2,-0.9)node[above right]{a};
+    \draw[->]  ( $ (pop6.south)$) -| ($(push10.north)$) node[above left]{a};
+    \draw[->]  ( $ (push10.south)$) -| ($(pop8.west)$);
+   \draw[->]  ( $ (pop8.south)$) -| ($(read2.north)$)node[above right]{x};
+    \draw[->]  ( $ (read2.south)$) -| ($(pop9.north)$)node[above right]{$\Delta$};
+     \draw[->]  ( $ (pop9.south)$) -| ($(accept.north)$)node[above right]{\$};
+     \draw[->]  ( $ (read2.west)$)-++(-2,0) node[above left]{a}-++(-2,8.5)-++(-0.9,8.5);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\clearpage
 
+\begin{figure}
+\begin{center}
+\caption{Q08-11: Summary Table}
+\begin{tabular}{| l | c | c |c |c|c| }
+\hline
+FROM Where & To Where & READ What & POP What& PUSH What & ROW Number\\ \hline
+START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
+
+\end{tabular}
+\end{center}
+\end{figure}
+
+\clearpage
 \end{document}
