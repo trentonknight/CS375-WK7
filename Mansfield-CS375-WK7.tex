@@ -493,7 +493,10 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
-
+\begin{figure}
+Q04:
+$a^n$ and $b^n$ must be on the outside edges of the string and not larger than one. While this language is not quite an EVENPALINDROME it must be even with the internal $b^m$  and  $a^m$ grouped in twos. This allows the string to get pumped up in the center and remain even.
+\end{figure}
 \begin{figure}
 \begin{center}
 \caption{Q05-07: Conversion Form}
@@ -656,6 +659,19 @@ $Read_2$&$\Delta$&$\drawboxes{} $\\ \hline
 $Pop$&$\Delta$&$\drawboxes{} $\\ \hline
 \textcolor{green!50!brown!89!}{Accept}&$\Delta$&$\drawboxes{} $\\ \hline
 \end{tabular}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\caption{Q07: FA PALINDROME}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4.8cm, semithick]
+\tikzstyle{every state}=[draw=black,text=black, ball color=red!40!blue!47!]
+\node[state,initial,accepting] (X) {X};
+\node[state][right of=X](Y){Y};
+\path (X)edge [bend left] node{a + b}(Y);
+\path (Y)edge [bend left] node{a + b}(X);       
+\end{tikzpicture} 
 \end{center}
 \end{figure}
 \clearpage
