@@ -278,7 +278,7 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
    \draw [->] ( $ (read3.west)$)  -| ($(pop4.east)$)node[above]{c};
    \draw [->] ( $ (read3.east)$)  -| ($(pop5.west)$)node[above]{d};
    \draw [->] ( $ (read3.south)$)  -| ($(pop6.north)$)node[left]{$\Delta$};
-   \draw [->] ( $ (pop6.west)$) --+(-3,0) node[above]{$\Delta$}-| ($(accept.south)$);
+   \draw [->] ( $ (pop6.west)$) --+(-3,0) node[above]{$\$$}-| ($(accept.south)$);
    \draw [->] ( $ (pop4.north)$)  -| ($(push4.south)$)node[below left]{c};
    \draw [->] ( $ (pop5.north)$)  -| ($(push5.south)$)node[below right]{d};
    \draw [->] ( $ (push4.east)$)  -| ($(pop3.west)$);
@@ -287,7 +287,7 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
    \draw [->] ( $ (pop7.south)$) -|  ($(push6.north)$)node[above left]{\$};
    \draw [->] ( $ (push6.south)$) -|  ($(push7.north)$)node[above left]{c};
    \draw [->] ( $ (push7.south)$) --+(0,-1)-|  ($(read2.west)$);
-   \draw [->] ( $ (pop8.south)$) -| node[left]{$\Delta$} ($(accept.north)$);
+   \draw [->] ( $ (pop8.south)$) -| node[left]{$\$$} ($(accept.north)$);
 \end{tikzpicture}
 \end{center}
 \end{figure}
@@ -299,15 +299,35 @@ shapes.misc,shapes.arrows,chains,matrix,scopes,decorations.pathmorphing,backgrou
 \hline
 FROM Where & To Where & READ What & POP What& PUSH What & ROW Number\\ \hline
 START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
-$READ_1$&ACCEPT&$\Lambda$&$\Lambda$&-&2\\ \hline
+$READ_1$&ACCEPT&$\Lambda$&$\$$&-&2\\ \hline
 $READ_1$&$READ_2$&c&\$&c\$&3\\ \hline
 $READ_1$&$READ_2$&c&c&cc&4\\ \hline
 $READ_2$&$READ_2$&c&c&cc&5\\ \hline
 $READ_2$&$READ_3$&d&c&-&6\\ \hline
 $READ_3$&$READ_3$&c&cc&c&7\\ \hline
 $READ_3$&$READ_3$&d&dc&d&7\\ \hline
-$READ_3$&$ACCEPT$&$\Lambda$&$\Lambda$&-&8\\ \hline
+$READ_3$&$ACCEPT$&$\Lambda$&$\$$&-&8\\ \hline
 \end{tabular}
+\end{center}
+\end{figure}
+\begin{figure}
+\begin{center}
+\caption{Q03.a Productions}
+Rule 1:
+$S \rightarrow Net(START,ACCEPT,\$)$\\
+Rule 2:\\
+Net($READ_1$,ACCEPT,$\$$)$\rightarrow$ $Row_2$\\
+Net($READ_2$,$READ_3$,$\$$)$\rightarrow$ $Row_6$\\
+Net($READ_3$,ACCEPT,$\$$)$\rightarrow$ $Row_8$\\
+Rule 3:\\
+$Row_1 \rightarrow \Lambda$\\
+$Row_2 \rightarrow \Lambda$\\
+$Row_3 \rightarrow c$\\
+$Row_4 \rightarrow c$\\
+$Row_5 \rightarrow c$\\
+$Row_6 \rightarrow d$\\
+$Row_7 \rightarrow c$\\
+$Row_8 \rightarrow c$\\
 \end{center}
 \end{figure}
 %tape one
@@ -473,7 +493,36 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
-
+\clearpage
+\begin{figure}
+\begin{center}
+\caption{Q05: Conversion Form}
+\begin{tikzpicture}[node distance=2.8cm,
+        point/.style={coordinate},>=stealth',thick,draw=black!50,
+        tip/.style={->,shorten >=0.007pt},every join/.style={rounded corners},
+        hv path/.style={to path={-| (\tikztotarget)}},
+        vh path/.style={to path={|- (\tikztotarget)}},
+        text height=1.5ex,text depth=.25ex % align text horizontally
+    ]
+    %Standard Pushdown Symbols
+   \node (start) [nonterminal]   {START};
+   \node (push1)[nonterminal] at (0,-4) {PUSH \$};
+   %You will need multiple READ and POP Nodes with a varity of names.
+   \node (pop1) [terminal]  at (0,-2)       {$POP_1$};
+   \node (pop2) [terminal]  at (-4,0)       {$POP_2$};
+   \node (pop3) [terminal]  at (-4,-2)       {$POP_3$};
+   \node (pop4) [terminal]  at (-4,-4)       {$POP_4$};
+   \node (pop5) [terminal]  at (-4,-6)       {$POP_5$};
+   \node (read1)[terminal] at (0,-6)        {$READ_1$};
+   %draw straight lines
+   \draw [->] ( $ (start.south)$)  -| ($(pop1.north)$);
+   \draw [->] ( $ (pop1.south)$) -|  ($(push1.north)$)node[above left]{\$};
+   \draw [->] ( $ (push1.south)$)  -| ($(read1.north)$);
+   \draw [->] ( $ (read1.west)$) -++(-0.8,0) -++(-0.8,6)-++(-1.9,6);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\clearpage
 
 
 \end{document}
