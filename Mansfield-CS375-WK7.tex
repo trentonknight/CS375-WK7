@@ -572,7 +572,15 @@ Pop&c$\Delta$&$\drawboxes{} $\\ \hline
 \hline
 FROM Where & To Where & READ What & POP What& PUSH What & ROW Number\\ \hline
 START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
-
+$READ_1$&$READ_1$&a&\$&x\$&2\\ \hline
+$READ_1$&$READ_1$&a&a&xa&3\\ \hline
+$READ_1$&$READ_1$&b&b&xb&4\\ \hline
+$READ_1$&$READ_1$&b&\$&x\$&5\\ \hline
+$READ_1$&$READ_2$&a&ax&a&6\\ \hline
+$READ_1$&$READ_2$&b&bx&b&7\\ \hline
+$READ_2$&$READ_2$&a&ax&a&8\\ \hline
+$READ_2$&$READ_2$&b&bx&b&9\\ \hline
+$READ_2$&$ACCEPT$&$\Delta$&\$&-&10\\ \hline
 \end{tabular}
 \end{center}
 \end{figure}
@@ -650,6 +658,13 @@ START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
 \hline
 FROM Where & To Where & READ What & POP What& PUSH What & ROW Number\\ \hline
 START&$READ_1$&$\Lambda$&\$&\$&1\\ \hline
+$READ_1$&$READ_1$&a&\$&x\$&2\\ \hline
+$READ_1$&$READ_1$&a&a&xa&3\\ \hline
+$READ_1$&$READ_1$&b&b&xb&4\\ \hline
+$READ_1$&$READ_1$&b&\$&x\$&5\\ \hline
+$READ_1$&$READ_2$&a&ax&a&6\\ \hline
+$READ_2$&$READ_2$&a&ax&a&8\\ \hline
+$READ_2$&$ACCEPT$&$\Delta$&\$&-&10\\ \hline
 
 \end{tabular}
 \end{center}
